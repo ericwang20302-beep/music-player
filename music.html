@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>音乐播放器</title>
+    <!-- 引入APlayer样式 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            color: #fff;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            margin-top: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .date {
+            color: #e6d0b2;
+            font-style: italic;
+        }
+        
+        .player-container {
+            margin: 20px 0;
+        }
+        
+        .instructions {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 30px;
+        }
+        
+        .instructions h2 {
+            color: #e6d0b2;
+            margin-top: 0;
+        }
+        
+        .tips {
+            color: #ff6b6b;
+            font-weight: bold;
+            margin: 15px 0;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-left: 4px solid #ff6b6b;
+        }
+        
+        footer {
+            margin-top: 30px;
+            text-align: center;
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>音乐播放器</h1>
+            <div class="date">2025年9月12日</div>
+        </header>
+        
+        <div class="player-container">
+            <div id="aplayer"></div>
+        </div>
+        
+    </div>
+    
+    <footer>
+        <p>Powered by APlayer | 音乐来源: 网络资源</p>
+    </footer>
+
+    <!-- 引入APlayer脚本 -->
+    <script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
+    <script>
+        // 初始化APlayer
+        const ap = new APlayer({
+            container: document.getElementById('aplayer'),
+            narrow: false,
+            autoplay: false, // 改为false，因为大多数浏览器阻止自动播放
+            mode: 'random',
+            showlrc: 3,
+            mutex: true,
+            theme: '#e6d0b2',
+            preload: 'metadata',
+            listmaxheight: '513px',
+            music: [
+                {
+                    title: "ガーデン",
+                    author: "藤井風",
+                    url: "https://skilled-silver-ctfwsz8a3c.edgeone.app/M500000tZXp523cI9x.mp3",
+                    pic: "https://extended-amaranth-dpyl8zkizl.edgeone.app/微信图片_20250913205535_8_25.png",
+                    lrc: "ガーデン-藤井风.lrc"
+                }
+            ]
+        });
+        
+        // 添加错误处理
+        ap.on('error', function() {
+            console.error('播放器初始化出错，请检查音乐文件URL');
+            alert('音乐加载失败，请检查网络连接或音乐文件URL');
+        });
+        
+        // 添加播放器就绪事件
+        ap.on('ready', function() {
+            console.log('播放器已就绪');
+        });
+    </script>
+</body>
+</html>
